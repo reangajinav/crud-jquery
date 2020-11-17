@@ -29,7 +29,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h2 class="modal-title">Form Tambah Provinsi</h2>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<button type="button" class="close" data-dismiss="modal" id="clear">&times;</button>
 			</div>
 			<div class="modal-body">
 				<form action="" method="post">
@@ -44,7 +44,7 @@
 				</form>
 			</div>			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal" id="clear2">close</button>
 			</div>
 		</div>
 	</div>
@@ -74,7 +74,7 @@
 					'<td> '+ (i+1) +' </td>' +
 					'<td> '+ data[i].nama_provinsi +' </td>' +
 					'<td> '+ data[i].jumlah_penduduk +' </td>' +
-					'<td> '+ '<a href="#form" data-toggle="modal" class="btn btn-warning mr-1" onclick="submit('+data[i].id_provinsi+');" >Ubah</a>' + '<a href="#" class="btn btn-danger" onclick="hapus('+data[i].id_provinsi+');">Hapus</a>' +' </td>' +
+					'<td> '+ '<a href="#form" data-toggle="modal" class="btn btn-warning mr-1" onclick="submit('+data[i].id_provinsi+');" >Ubah</a>' + '<a href="" class="btn btn-danger" onclick="hapus('+data[i].id_provinsi+');">Hapus</a>' +' </td>' +
 					'</tr>';
 				}
 				$('#target').html(baris);
@@ -126,6 +126,25 @@
 				{
 					$('[name="nama_provinsi"]').val(hasil[0].nama_provinsi);
 					$('[name="id_provinsi"]').val(hasil[0].id_provinsi);
+
+					$(document).ready(function(){
+
+						$("#clear").click(function(){
+							$("#form").modal('hide');
+							ambil();
+							$("[name='nama_provinsi']").val('');
+						})
+					});
+
+					$(document).ready(function(){
+
+						$("#clear2").click(function(){
+							$("#form").modal('hide');
+							ambil();
+							$("[name='nama_provinsi']").val('');
+						})
+					});
+					
 					
 				}
 			})
@@ -151,6 +170,7 @@
 				{
 					$("#form").modal('hide');
 					ambil();
+					$("[name='nama_provinsi']").val('');
 					
 				}
 			}

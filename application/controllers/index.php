@@ -68,8 +68,15 @@ class Index extends CI_Controller {
 		}
 		else
 		{	
-			$result['pesan']='';
-			$this->Mprovinsi->update_provinsi($input,$id);
+			
+			if($this->Mprovinsi->update_provinsi($input,$id) > 0)
+			{
+				$result['pesan']='';
+			}
+			else
+			{
+				$result['pesan']='gagal update';
+			}
 
 			
 		}		

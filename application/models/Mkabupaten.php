@@ -21,13 +21,22 @@ class Mkabupaten extends CI_Model {
 		if ($inputan=="semua") {
 			$inputan='';
 			$inputan2='';
+			return $this->db
+			->join('provinsi p','p.id_provinsi=k.id_provinsi','left')
+			->get('kabupaten k')
+			->result_array();
+
 		}
-		return $this->db
-		->join('provinsi p','p.id_provinsi=k.id_provinsi','left')
-		->where('k.id_provinsi', $inputan)
-		->where('k.id_kabupaten', $inputan2)
-		->get('kabupaten k')
-		->result_array();
+		else
+		{
+
+			return $this->db
+			->join('provinsi p','p.id_provinsi=k.id_provinsi','left')
+			->where('k.id_provinsi', $inputan)
+			->where('k.id_kabupaten', $inputan2)
+			->get('kabupaten k')
+			->result_array();
+		}
 	}
 
 	
@@ -38,12 +47,14 @@ class Mkabupaten extends CI_Model {
 		$jml=$this->input->post('jumlah_penduduk');
 
 		$data = [
-					"id_provinsi" => $prov,
-					"nama_kabupaten" =>$kab,
-					"jumlah_penduduk" =>$jml
-				];
+			"id_provinsi" => $prov,
+			"nama_kabupaten" =>$kab,
+			"jumlah_penduduk" =>$jml
+		];
 
 		$this->db->insert('kabupaten', $data);
+
+		return $this->db->affected_rows();
 	}
 
 	public function detail_kabupaten($id)
@@ -51,8 +62,7 @@ class Mkabupaten extends CI_Model {
 		return $this->db
 		->join('provinsi p','p.id_provinsi=k.id_provinsi','left')
 		->where('k.id_kabupaten',$id)
-		->get('kabupaten k')
-		->row_array();
+		->get('kabupaten k');
 	}
 
 	public function get_kabupaten($id)
@@ -71,12 +81,13 @@ class Mkabupaten extends CI_Model {
 		$jml=$this->input->post('jumlah_penduduk');
 
 		$data = [
-					"id_provinsi" => $prov,
-					"nama_kabupaten" =>$kab,
-					"jumlah_penduduk" =>$jml
-				];
+			"id_provinsi" => $prov,
+			"nama_kabupaten" =>$kab,
+			"jumlah_penduduk" =>$jml
+		];
 		$this->db->where('id_kabupaten', $id);
 		$this->db->update('kabupaten', $data);
+		return $this->db->affected_rows();
 	}
 
 	public function hapus_kabupaten($id)
@@ -89,4 +100,4 @@ class Mkabupaten extends CI_Model {
 
 /* End of file Mkabupaten.php */
 /* Location: ./application/models/Mkabupaten.php */
- ?>
+?>

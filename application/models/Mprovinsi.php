@@ -37,6 +37,8 @@ class Mprovinsi extends CI_Model
 			$this->db->where('id_provinsi', $id);
 			$this->db->update('provinsi', $data);
 
+			return $this->db->affected_rows();
+
 
 		}
 
