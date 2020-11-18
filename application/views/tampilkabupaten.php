@@ -7,21 +7,12 @@
 </div>
 
 <div class="container">	
-	<form method="post" action="" id="searching">
+	<form method="post" id="searching">
 		<div class="row mb-3">
 			<div class="col-sm-12"><h4>Cari</h4></div>
 			<div class="col-sm-3">
 				<div class="form-group">
 					<select name="selectProvinsi" id="selectProvinsi" class="form-control">
-						<option></option>
-						<option value="semua">Semua</option>
-						<?php foreach ($provinsi as $key => $value) {
-							?>
-							<option value="<?php echo $value['id_provinsi'] ?>">
-								<?php echo $value['nama_provinsi'];?></option>
-							<?php } ?>
-
-
 						</select>
 					</div>
 				</div>
@@ -104,6 +95,15 @@
 				dataType: 'json',
 				success: function(data)
 				{
+
+					var opsi='<option disabled selected>Pilih</option>' + '<option value="semua">Semua</option>' ;
+
+					for(var i=0; i<data.provinsi.length; i++)
+					{
+
+						opsi += '<option value="'+data.provinsi[i].id_provinsi+'">'+data.provinsi[i].nama_provinsi+'</option>';
+					}
+
 					var baris;
 					data=data.kabupaten;
 					for(var i=0; i<data.length; i++)
@@ -116,6 +116,8 @@
 						'<td> <a href="#form" class="btn btn-warning" data-toggle="modal" onclick="submit('+ data[i].id_kabupaten +')">Ubah</a> <a href="" class="btn btn-danger" onclick="hapus('+data[i].id_kabupaten+')">Hapus</a> </td>' +
 						'</tr>';
 					}
+
+					$("#selectProvinsi").html(opsi);
 					$('#target').html(baris);
 				}
 
@@ -207,10 +209,10 @@
 						$("#provinsi").html(opsi);
 
 
-						$('[name="id_kabupaten"]').val(kabupaten[0].id_kabupaten);
-						$('[name="nama_kabupaten"]').val(kabupaten[0].nama_kabupaten);
-						$('[name="id_provinsi"]').val(kabupaten[0].id_provinsi);
-						$('[name="jumlah_penduduk"]').val(kabupaten[0].jumlah_penduduk);
+						$('[name="id_kabupaten"]').val(kabupaten.id_kabupaten);
+						$('[name="nama_kabupaten"]').val(kabupaten.nama_kabupaten);
+						$('[name="id_provinsi"]').val(kabupaten.id_provinsi);
+						$('[name="jumlah_penduduk"]').val(kabupaten.jumlah_penduduk);
 
 						$(document).ready(function(){
 

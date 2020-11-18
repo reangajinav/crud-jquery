@@ -51,7 +51,7 @@ class Index extends CI_Controller {
 	public function ambilId()
 	{
 		$id = $this->input->post('id_provinsi');
-		$dataprovinsi = $this->Mprovinsi->detail_provinsi($id)->result();
+		$dataprovinsi = $this->Mprovinsi->detail_provinsi($id);
 
 		echo json_encode($dataprovinsi);
 	}
@@ -69,7 +69,7 @@ class Index extends CI_Controller {
 		else
 		{	
 			
-			if($this->Mprovinsi->update_provinsi($input,$id) > 0)
+			if($this->Mprovinsi->update_provinsi($input,$id))
 			{
 				$result['pesan']='';
 			}

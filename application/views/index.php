@@ -65,6 +65,7 @@
 			async: false,
 			dataType: 'json',
 			success: function(data){
+
 				var baris;
 				for (var i = 0 ; i < data.length; i++) {
 					if (data[i].jumlah_penduduk == null) {
@@ -124,8 +125,8 @@
 				dataType: 'json',
 				success: function(hasil)
 				{
-					$('[name="nama_provinsi"]').val(hasil[0].nama_provinsi);
-					$('[name="id_provinsi"]').val(hasil[0].id_provinsi);
+					$('[name="nama_provinsi"]').val(hasil.nama_provinsi);
+					$('[name="id_provinsi"]').val(hasil.id_provinsi);
 
 					$(document).ready(function(){
 
@@ -173,6 +174,8 @@
 					$("[name='nama_provinsi']").val('');
 					
 				}
+				
+
 			}
 
 		});

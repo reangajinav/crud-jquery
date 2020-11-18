@@ -23,7 +23,6 @@ class Kabupaten extends CI_Controller {
 	public function ambil()
 	{
 		$data['provinsi']=$this->Mkabupaten->tampil_provinsi();
-
 		$data['kabupaten']=$this->Mkabupaten->tampil_kabupaten();
 
 		$input= $this->input->post();
@@ -31,10 +30,9 @@ class Kabupaten extends CI_Controller {
 
 		if($input)
 		{
-			$inputan=$input['selectProvinsi'];
-			$inputan2=$input['selectKabupaten'];
-			$data['kabupaten']=$this->Mkabupaten->search_kabupaten($inputan,$inputan2);
+			$data['kabupaten']=$this->Mkabupaten->search_kabupaten($input);
 		}
+
 
 		echo json_encode($data);
 	}
@@ -48,7 +46,7 @@ class Kabupaten extends CI_Controller {
 		{
 
 			$hasil = $this->Mkabupaten->tambah_kabupaten($input);
-			if ($hasil > 0) 
+			if ($hasil) 
 			{
 				$result['pesan']='';
 			}
@@ -64,7 +62,7 @@ class Kabupaten extends CI_Controller {
 	{
 		$id = $this->input->post('id_kabupaten');
 		$data['provinsi']=$this->Mkabupaten->tampil_provinsi();
-		$data['kabupaten'] = $this->Mkabupaten->detail_kabupaten($id)->result();
+		$data['kabupaten'] = $this->Mkabupaten->detail_kabupaten($id);
 
 		echo json_encode($data);
 	}
@@ -76,7 +74,7 @@ class Kabupaten extends CI_Controller {
 		if($input)
 		{
 			$hasil = $this->Mkabupaten->update_kabupaten($input, $id);
-			if($hasil > 0)
+			if($hasil)
 			{
 				$result['pesan']='';
 			}
